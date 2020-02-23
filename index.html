@@ -1,61 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-
 </head>
+
 <body>
-    <input type="text" name="" id="amount">
+    <input type="text" id="uniqueID" value="0x4099c7d3B7cb1733908568Ea97ABD5f34F1eEed3">
+    <button id="setID">Click</button>
+    <br>
+    <!-- <script>
+   
+</script> -->
+
+    <input type="text" id="amount">
     <p id='balance'></p>
-    <button id="deposite">Deposite</button>
-    <button id="withdraw">Withdraw</button>
+    <button id="deposit">Deposit</button>
+    <button id="nameID">Name</button>
+    <br>
+    <img src="giphy.gif" alt="" srcset="" id="loader" style="visibility: hidden;"> 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"></script>
-    <script>      
+    <script>
         var contract;
-        $(document).ready(function()
-        {
-            web3 = new Web3(web3.currentProvider);
-            var address = "0x6516092D2e2b984a02C2aAB36C20A38dCBf5eE97";
-            var abi = [
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "amt",
-				"type": "int256"
-			}
-		],
-		"name": "deposit",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "amt",
-				"type": "int256"
-			}
-		],
-		"name": "withDraw",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
+        var global_abi = null;
+        var global_address = null;
+        $(document).ready(function () {
+            $('#setID').click(function () {
+                document.getElementById("loader").style.visibility = "visible";
+                var address = $('#uniqueID').val();
+                global_address = address;
+                console.log(address);
+
+                web3 = new Web3(web3.currentProvider);
+                // var address = "0x4099c7d3B7cb1733908568Ea97ABD5f34F1eEed3";
+                var abi = [
 	{
 		"inputs": [],
 		"payable": false,
@@ -65,7 +47,35 @@
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "getBal",
+		"name": "getName",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getSec",
+		"outputs": [
+			{
+				"name": "",
+				"type": "int256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getUnique",
 		"outputs": [
 			{
 				"name": "",
@@ -77,13 +87,64 @@
 		"type": "function"
 	}
 ];
-            contract = new web3.eth.Contract(abi,address);
+                global_abi = abi;
+                contract = new web3.eth.Contract(abi, address);
 
-            contract.methods.getBal().call().then(function(bal){
-                $('#balance').html(bal);
+                contract.methods.getUnique().call().then(function (bal) {
+                    $('#balance').html(bal);
+                    document.getElementById("loader").style.visibility = "hidden";
+
+                })
             })
         })
-    </script>
-</body>
-</html>
 
+
+        // $('#deposit').click(function () {
+
+        //     // var amt = 0;
+        //     // amt = parseInt($('#amount').val());
+        //     // console.log(amt);
+        //     //   web3.eth.getAccounts().then(function(accounts)
+        //     // {
+        //     //     console.log(accounts + "account");
+        //     //     var acc = accounts[0];
+        //     //     console.log(acc + " acc");
+        //     //     return contract.methods.deposit(amt).send({from:acc});
+        //     // }).then(function (tx)
+        //     // {
+        //     //     console.log(tx);
+        //     // }).catch(function (tx) 
+        //     // {
+        //     //     console.log(tx);
+        //     // })
+        //     var amt = 0;
+        //     amt = parseInt($('#amount').val());
+
+        //     contract.methods.withDraw(amt).call().then(async function (bal) {
+        //         $('#balance').html(bal + " Hii");
+        //     })
+        // })
+        var setname = null;
+
+        $('#nameID').click(function () {
+            document.getElementById("loader").style.visibility = "visible";
+            contract.methods.getName().call().then(function (setname) {
+                    $('#balance').html(setname);
+                    document.getElementById("loader").style.visibility = "hidden";
+
+                })
+        })
+        $('#deposit').click(function () {
+            document.getElementById("loader").style.visibility = "visible";
+            contract.methods.getSec().call().then(function (setname) {
+                    $('#balance').html(setname);
+                    document.getElementById("loader").style.visibility = "hidden";
+
+                })
+        })
+
+    </script>
+
+</body>
+
+</html>

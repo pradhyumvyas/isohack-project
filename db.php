@@ -9,7 +9,7 @@ $file = $_POST['file'];
 
 $servername = "192.168.0.126";
 $username = "root";
-$password = "root";
+$password = "";
 $dbname = "mysql";
 $port = 3306;
 
@@ -21,7 +21,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO  patientdb(First_name, Last_name, DOB, City, State, File_upload)
+$sql = "INSERT INTO  patientdb(First_name, Last_name, DOB, City, State1, File_upload)
 VALUES ('$first', '$last', '$dob', '$city', '$state', '$file')";
 
 if ($conn->query($sql) === TRUE) {
