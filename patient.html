@@ -14,6 +14,8 @@
     <title>Document</title>
 </head>
 <body>
+
+    <body>
         <header >
         <div class="container"> 
               <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,10 +32,10 @@
             <li class="nav-item">
               <a class="nav-link" href="#">About Us</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item ">
               <a class="nav-link" href="#">Hospital login</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="#">Patient login</a>
               </li>
               <li class="nav-item">
@@ -44,45 +46,19 @@
         </div>
       </nav>
     </header>
+
     <div class="container">
-        <div class="card-group">
-            <div class="card">
-              <img class="card-img-top" src="iso1.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Why us</h5>
-                <p class="card-text">Easy accessibility from any device helps patients to track their
-                     health data and condition 24/7. Also, if needed, they are able to connect
-                     and consult with their care team anytime. </p>
-                </div>
+        <br><br><br>
+        <form class="form-inline">
+            <div class="form-group mb-2">
+              <label for="Name" class="sr-only">Name</label>
+              <input type="text" class="form-control" id="Name" placeholder="Name">
             </div>
-            <div class="card">
-              <img class="card-img-top" src="iso2.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">D - Care</h5>
-                <p class="card-text">D-care is a platform where All Health Records are encrypted and
-                     only a patient has access to it via using a personal key, so information 
-                     cannot be stolen or changed without a permission of a patient.</p>
-              </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <label for="inputPassword2" class="sr-only">secret Key</label>
+              <input type="password" class="form-control" id="inputPassword2" placeholder="secret key">
             </div>
-            <div class="card">
-              <img class="card-img-top" src="iso3 .jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">What we do??</h5>
-                <p class="card-text">If an individual purchases health insurance – all the details 
-                    of policy get linked to their profile within the blockchain. When a patient undergoes 
-                    a medical procedure which is covered by their policy then the smart contract will 
-                    automatically be triggered and the correct payment from the insurance company to the 
-                    hospital will be automatically made. </p>
-              </div>
-            </div>
-
-        </div>
-        <div>
-            <button type="button" class="btn btn-primary btn-lg btn-block">Fill Patient's Form</button>
-    <button type="button" class="btn btn-secondary btn-lg btn-block">Check Patient's Details</button>
-    <button type="button" class="btn btn-secondary btn-lg btn-block">.......</button>
-</div>
-</div>
-
-</body>
-</html>
+            <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+          </form>
+    </body>
+    </html>
